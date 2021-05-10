@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>ログイン</title>
-</head>
-<body>
-  <p>ログイン</p>
+<?php
+// ログイン後のページ
 
-  <form action="check.php" method="post">
-    name:<input type="text" name="name"><br>
-    pass:<input type="text" name="pass">
-    <input type="submit" value="送信">
-  </form>
-</body>
-</html>
+require_once __DIR__ . '/function.php';
+
+// 未ログインならログインページへ移動する
+require_logined_session();
+
+header('Content-Type: text/html; charset=UTF-8');
+
+?>
+
+<!DOCTYPE html>
+<title>会員限定ページ</title>
+<h1>ようこそ,<?=h($_SESSION['username'])?>さん</h1>
+<a href="/logout.php?token=<?=h(generate_token())?>">ログアウト</a>
